@@ -1,9 +1,25 @@
 ﻿// ServiceWithLibEvent.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
-#include <iostream>
 #include <event2/event.h>
+#include <event2/thread.h>
+#include<event2/listener.h>
+#include <string.h>
+#ifndef _WIN32
+#include <signal.h>
+#endif
+#include <iostream>
 using namespace std;
+#define SPORT 5001
+
+using namespace std;
+
+
+
+void listen_cb(struct evconnlistener * e, evutil_socket_t s, struct sockaddr *a, int socklen, void *arg) {
+	cout << "listen_cb" << endl;
+}
+
 int main()
 {
 #ifdef _WIN32 
@@ -12,13 +28,78 @@ int main()
 	WSAStartup(MAKEWORD(2, 2), &wsa);
 #endif
 
-	std::cout << "test libevent!\n";
-	//创建libevent的上下文
-	event_base * base = event_base_new();
-	if (base)
+	event_config *conf = event_config_new();
+
+	const char **methods = event_get_supported_methods();
+	cout << "支持的 方法" << endl;
+	for (int i = 0; methods[i] != nullptr; i++)
 	{
-		cout << "event_base_new success!" << endl;
+		cout << methods[i] << endl;
 	}
+
+#ifdef _WIN32
+	event_config_set_flag(conf, EVENT_BASE_FLAG_STARTUP_IOCP);
+	evthread_use_windows_threads();
+
+	SYSTEM_INFO si;
+	GetSystemInfo(&si);
+	event_config_set_num_cpus_hint(conf, si.dwNumberOfProcessors);
+#endif
+
+	event_config_require_features(conf, EV_FEATURE_FDS);
+
+	event_base *base = event_base_new_with_config(conf);
+	event_config_free(conf);
+
+	if (!base) {
+		cerr << "event_base_new_with_config failed!" << endl;
+		base = event_base_new();
+		if (!base)
+		{
+			cerr << "event_base_new failed！" << endl;
+			return 0;
+		}
+	}
+	else {
+		int f = event_base_get_features(base);
+		if (f&EV_FEATURE_ET)
+			cout << "EV_FEATURE_ET events are supported." << endl;
+		else
+			cout << "EV_FEATURE_ET events are not supported." << endl;
+		if (f&EV_FEATURE_O1)
+			cout << "EV_FEATURE_O1 events are supported." << endl;
+		else
+			cout << "EV_FEATURE_O1 events are not supported." << endl;
+		if (f&EV_FEATURE_FDS)
+			cout << "EV_FEATURE_FDS events are supported." << endl;
+		else
+			cout << "EV_FEATURE_FDS events are not supported." << endl;
+
+		if (f&EV_FEATURE_EARLY_CLOSE)
+			cout << "EV_FEATURE_EARLY_CLOSE events are supported." << endl;
+		else
+			cout << "EV_FEATURE_EARLY_CLOSE events are not supported." << endl;
+		cout << "event_base_new_with_config success!" << endl;
+
+
+
+		sockaddr_in sin;
+		memset(&sin, 0, sizeof(sin));
+		sin.sin_family = AF_INET;
+		sin.sin_port = htons(SPORT);
+
+		evconnlistener * ev = evconnlistener_new_bind(base, listen_cb, base, 10,
+			LEV_OPT_CLOSE_ON_FREE | LEV_OPT_REUSEABLE,
+			(sockaddr*)&sin, sizeof(sin));
+		event_base_dispatch(base);
+		evconnlistener_free(ev);
+
+		event_base_free(base);
+	}
+
+#ifdef _WIN32
+	WSACleanup();
+#endif
 	return 0;
 }
 

@@ -15,8 +15,81 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ServiceWithLibEvent.cpp">
+    <ClCompile Include="XThread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="XThreadPool.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="XFtpTask.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="XFtpServerCMD.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="XFtpFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ev_ftp_server.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="XFtpUSER.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="XFtpLIST.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="XFtpPORT.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="XFtpSTOR.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="XFtpRETR.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="XTask.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XThread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XThreadPool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XFtpTask.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XFtpServerCMD.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XFtpFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XFtpUSER.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XFtpLIST.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XFtpPORT.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XFtpSTOR.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XFtpRETR.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ServiceWithLibEvent.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

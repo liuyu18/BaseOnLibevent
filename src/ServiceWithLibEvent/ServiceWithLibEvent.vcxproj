@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -154,7 +154,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ServiceWithLibEvent.cpp" />
+    <ClCompile Include="ev_ftp_server.cpp" />
+    <ClCompile Include="XFtpFactory.cpp" />
+    <ClCompile Include="XFtpLIST.cpp" />
+    <ClCompile Include="XFtpPORT.cpp" />
+    <ClCompile Include="XFtpRETR.cpp" />
+    <ClCompile Include="XFtpServerCMD.cpp" />
+    <ClCompile Include="XFtpSTOR.cpp" />
+    <ClCompile Include="XFtpTask.cpp" />
+    <ClCompile Include="XFtpUSER.cpp" />
+    <ClCompile Include="XThread.cpp" />
+    <ClCompile Include="XThreadPool.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="XFtpFactory.h" />
+    <ClInclude Include="XFtpLIST.h" />
+    <ClInclude Include="XFtpPORT.h" />
+    <ClInclude Include="XFtpRETR.h" />
+    <ClInclude Include="XFtpServerCMD.h" />
+    <ClInclude Include="XFtpSTOR.h" />
+    <ClInclude Include="XFtpTask.h" />
+    <ClInclude Include="XFtpUSER.h" />
+    <ClInclude Include="XTask.h" />
+    <ClInclude Include="XThread.h" />
+    <ClInclude Include="XThreadPool.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ServiceWithLibEvent.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
